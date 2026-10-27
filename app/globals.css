@@ -1,0 +1,1131 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: opencontent --default;
+}
+
+/* ------------------------------------------------------------------
+   Design tokens (Tailwind v4 @theme)
+   These power utilities like bg-brand, text-brand, border-brand/20
+------------------------------------------------------------------- */
+@theme {
+  --color-brand: #FF6B00;
+  --color-brand-dark: #C64D00;
+  --color-brand-deep: #9F3D00;
+  --color-brand-soft: #FFF7ED;
+  --color-ink: #171717;
+  --color-line: #E5E7EB;
+  --color-text-secondary: #666B75;
+  --color-surface-subtle: #F5F6F8;
+  --color-purple: #7c3aed;
+  --color-purple-light: #f5f3ff;
+
+  --font-sans: "Google Sans", "Google Sans Text", "Product Sans", -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+}
+
+@plugin "daisyui/theme" {
+  name: "opencontent";
+  default: true;
+  prefersdark: false;
+  color-scheme: "light";
+  --color-base-100: #ffffff;
+  --color-base-200: #F5F6F8;
+  --color-base-300: #E5E7EB;
+  --color-base-content: #171717;
+  --color-primary: #C64D00;
+  --color-primary-content: #ffffff;
+  --color-secondary: #7c3aed;
+  --color-secondary-content: #ffffff;
+  --color-accent: #2563eb;
+  --color-accent-content: #ffffff;
+  --color-neutral: #171717;
+  --color-neutral-content: #ffffff;
+  --color-info: #2563eb;
+  --color-info-content: #ffffff;
+  --color-success: #16a34a;
+  --color-success-content: #ffffff;
+  --color-warning: #f59e0b;
+  --color-warning-content: #ffffff;
+  --color-error: #dc2626;
+  --color-error-content: #ffffff;
+  --radius-selector: 0.75rem;
+  --radius-field: 0.5rem;
+  --radius-box: 1rem;
+}
+
+@layer base {
+  :root {
+    /* OpenContent semantic palette. Legacy aliases below remain for compatibility. */
+    --oc-brand: #FF6B00;
+    --oc-action: #C64D00;
+    --oc-action-hover: #9F3D00;
+    --oc-text-primary: #171717;
+    --oc-text-secondary: #666B75;
+    --oc-background: #FFFFFF;
+    --oc-surface-subtle: #F5F6F8;
+    --oc-border: #E5E7EB;
+    --oc-border-strong: #CBD5E1;
+    --oc-focus: #C64D00;
+    --oc-error: #B42318;
+    --oc-success: #147A3D;
+    --oc-warning: #946200;
+    --oc-destructive: #B42318;
+    --oc-home-watch-surface: #FFF1E8;
+    --oc-home-watch-icon: var(--oc-action);
+    --oc-home-listen-surface: #F2EDFF;
+    --oc-home-listen-icon: var(--purple);
+    --oc-home-read-surface: #EDF5FF;
+    --oc-home-read-icon: var(--blue);
+    --oc-home-learn-surface: #ECFAF1;
+    --oc-home-learn-icon: var(--green);
+    --oc-home-live-surface: #FFF0F1;
+    --oc-home-live-icon: var(--red);
+    --oc-home-shop-surface: #FFF8E4;
+    --oc-home-shop-icon: var(--oc-warning);
+    --oc-home-create-surface: #EEF4FF;
+    --oc-home-create-icon: var(--oc-action);
+    --oc-home-public-surface: #F4F2FF;
+    --oc-home-public-icon: #6D5BD0;
+    --oc-home-other-surface: #F3F4F6;
+    --oc-home-other-icon: var(--oc-text-secondary);
+    --oc-home-advertise-surface: #FFF4E8;
+    --oc-home-advertise-icon: var(--oc-action);
+    --oc-space-1: 4px;
+    --oc-space-2: 8px;
+    --oc-space-3: 12px;
+    --oc-space-4: 16px;
+    --oc-space-6: 24px;
+    --oc-space-8: 32px;
+    --oc-space-12: 48px;
+    --oc-space-16: 64px;
+    --oc-elevation-1: 0 2px 8px rgba(20, 24, 32, 0.06), 0 1px 2px rgba(20, 24, 32, 0.03);
+    --oc-elevation-2: 0 6px 20px rgba(20, 24, 32, 0.08), 0 2px 6px rgba(20, 24, 32, 0.04);
+
+    /* Compatibility aliases for existing feature components. */
+    --saffron: var(--oc-brand);
+    --saffron-hover: var(--oc-action);
+    --saffron-light: #FFF7ED;
+    --saffron-border: #FED7AA;
+    --saffron-thumb: #FFAA70;
+    --saffron-thumb-hover: #FF8A3D;
+
+    --white: var(--oc-background);
+    --black: var(--oc-text-primary);
+    --black-deep: #2B2B2B;
+    --gray-bg: var(--oc-background);
+    --gray-border: var(--oc-border);
+    --gray-border-dark: #cbd5e1;
+    --gray-muted: var(--oc-text-secondary);
+    --gray-deep: var(--oc-text-primary);
+    --gray-card: var(--oc-background);
+    --icon-neutral: var(--oc-text-secondary);
+
+    --green: #16a34a;
+    --green-light: #dcfce7;
+    --green-border: #86efac;
+
+    --blue: #2563eb;
+    --blue-light: #dbeafe;
+    --blue-border: #93c5fd;
+
+    --purple: #7c3aed;
+    --purple-hover: #6d28d9;
+    --purple-light: #f5f3ff;
+    --purple-border: #ddd6fe;
+
+    --red: #dc2626;
+    --red-light: #fee2e2;
+    --red-border: #fca5a5;
+  }
+
+  /* Consistent icon tone across navigation, cards, forms, and panels. */
+  .MuiSvgIcon-root {
+    color: var(--icon-neutral);
+    width: 17px !important;
+    height: 17px !important;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: var(--gray-bg);
+    color: var(--black);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  /* The mobile drawer follows the spacious reference layout while desktop
+     keeps the compact 224px application rail. */
+  @media (max-width: 1023px) {
+    .mobile-sidebar .MuiSvgIcon-root {
+      width: 28px !important;
+      height: 28px !important;
+    }
+
+    .mobile-sidebar .MuiSvgIcon-root[aria-hidden="true"] {
+      width: 20px !important;
+      height: 20px !important;
+    }
+
+    .mobile-sidebar .brand-lockup-mark {
+      width: 34px !important;
+      height: 34px !important;
+    }
+
+    .mobile-sidebar .brand-lockup-wordmark {
+      font-size: 32px !important;
+      letter-spacing: -0.035em;
+    }
+  }
+
+  /* Shared heading contrast used by the top navigation breadcrumb. */
+  h1,
+  h2 {
+    color: var(--oc-text-primary) !important;
+    font-weight: 500 !important;
+  }
+
+  h1 > .MuiSvgIcon-root,
+  h2 > .MuiSvgIcon-root {
+    width: 14px !important;
+    height: 14px !important;
+  }
+
+  button,
+  input,
+  select,
+  textarea,
+  optgroup {
+    font-family: inherit;
+  }
+
+  /* Consistent, accessible keyboard focus everywhere */
+  :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+    outline: 2px solid color-mix(in srgb, var(--oc-action) 70%, white);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background-color: color-mix(in srgb, var(--oc-brand) 22%, white);
+    color: var(--oc-action-hover);
+  }
+
+  /* Keeps numbers (views, revenue, counts) from jumping around */
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Specific Requested Typography Hierarchy: Brand wordmark weight increased slightly for optical symmetry */
+  .brand-text-28 {
+    font-size: 28px !important;
+    font-weight: 550 !important;
+    line-height: 1 !important;
+    letter-spacing: -0.02em !important;
+  }
+
+  .heading-regular-21 {
+    font-size: 21px !important;
+    font-weight: 400 !important;
+    line-height: 1.35 !important;
+  }
+
+  .body-regular-16 {
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    line-height: 1.45 !important;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Scrollbars — light authentic saffron throughout the application
+   Note: Do NOT set scrollbar-color on WebKit/Blink elements, because
+   Chromium on macOS disables ::-webkit-scrollbar when scrollbar-color
+   is present, falling back to macOS's un-tinted native grey overlay.
+------------------------------------------------------------------- */
+/* Firefox only */
+@supports not selector(::-webkit-scrollbar) {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--saffron-thumb) transparent;
+  }
+}
+
+/* Chrome, Edge, Safari (WebKit & Blink) */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar,
+::-webkit-scrollbar {
+  width: 6px !important;
+  height: 6px !important;
+}
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track,
+*::-webkit-scrollbar-track,
+::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb,
+*::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-thumb {
+  background-color: var(--saffron-thumb) !important;
+  border-radius: 9999px !important;
+}
+
+html::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover,
+*::-webkit-scrollbar-thumb:hover,
+::-webkit-scrollbar-thumb:hover,
+html::-webkit-scrollbar-thumb:active,
+body::-webkit-scrollbar-thumb:active,
+*::-webkit-scrollbar-thumb:active,
+::-webkit-scrollbar-thumb:active {
+  background-color: var(--saffron-thumb-hover) !important;
+}
+
+/* Dedicated saffron scrollbar utility class */
+.saffron-scrollbar::-webkit-scrollbar {
+  width: 6px !important;
+  height: 6px !important;
+}
+
+.saffron-scrollbar::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+.saffron-scrollbar::-webkit-scrollbar-thumb {
+  background-color: var(--saffron-thumb) !important;
+  border-radius: 9999px !important;
+}
+
+.saffron-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: var(--saffron-thumb-hover) !important;
+}
+
+/* ------------------------------------------------------------------
+   Brand buttons
+------------------------------------------------------------------- */
+.btn-saffron {
+  background-color: var(--oc-action);
+  color: #ffffff;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  transition: all 0.15s ease-in-out;
+  border: 1px solid var(--oc-action);
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.btn-saffron:hover {
+  background-color: var(--oc-action-hover);
+  box-shadow: none;
+}
+
+.btn-saffron svg {
+  color: #ffffff !important;
+}
+
+  .btn-saffron .MuiSvgIcon-root {
+    color: #ffffff !important;
+  }
+
+  .header-search-action .MuiSvgIcon-root {
+    color: #ffffff !important;
+  }
+
+.btn-saffron:focus-visible {
+  outline: 2px solid var(--oc-brand);
+  outline-offset: 2px;
+}
+
+.btn-saffron:disabled {
+  cursor: wait;
+  opacity: 0.6;
+}
+
+.btn-saffron:active {
+  transform: translateY(0.5px);
+}
+
+.btn-secondary {
+  background-color: #ffffff;
+  color: #1e293b;
+  font-weight: 500;
+  padding: 8px 14px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  border: 1px solid #cbd5e1;
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background-color: #f8fafc;
+  border-color: #94a3b8;
+}
+
+/* ------------------------------------------------------------------
+   Cards & surfaces
+------------------------------------------------------------------- */
+.surface-card {
+  background-color: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+  box-shadow: none;
+}
+
+/* Soft hover lift used by video cards, list rows and tiles */
+.lift-on-hover {
+  transition:
+    transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.lift-on-hover:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px -16px rgba(15, 23, 42, 0.5);
+}
+
+/* Quiet, editorial application chrome. Panels use one neutral treatment;
+   saffron is kept for an active control or a primary action only. */
+.app-shell {
+  background: var(--oc-background);
+}
+
+.content-column {
+  width: min(100%, 1440px);
+  margin-inline: auto;
+}
+
+.oc-page-content {
+  width: 100%;
+  padding-inline: var(--oc-space-3);
+}
+
+.home-empty-state-title {
+  font-weight: 600 !important;
+}
+
+.home-illustration-center .MuiSvgIcon-root {
+  color: #fff !important;
+}
+
+/* ------------------------------------------------------------------
+   OpenContent orbital ecosystem hero
+   Rings and icon paths share the same ellipse radii. Motion-path animation
+   moves each icon center along the ellipse without rotating the icon.
+------------------------------------------------------------------- */
+.oc-orbit {
+  position: relative;
+  width: min(100%, 480px);
+  height: clamp(220px, 20vw, 284px);
+  --oc-orbit-inner-rx: 23%;
+  --oc-orbit-inner-ry: 22%;
+  --oc-orbit-middle-rx: 34%;
+  --oc-orbit-middle-ry: 33%;
+  --oc-orbit-outer-rx: 45%;
+  --oc-orbit-outer-ry: 44%;
+  isolation: isolate;
+  contain: layout paint;
+}
+
+.oc-orbit__halo {
+  position: absolute;
+  inset: 22%;
+  z-index: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--oc-brand) 14%, transparent), transparent 68%);
+  opacity: 0.75;
+}
+
+.oc-orbit__ring {
+  box-sizing: border-box;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  border: 1px solid color-mix(in srgb, var(--oc-brand) 18%, var(--oc-border));
+  border-style: dashed;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  animation: oc-orbit-fade-in 700ms ease-out both;
+}
+
+.oc-orbit__ring--inner {
+  width: calc(var(--oc-orbit-inner-rx) + var(--oc-orbit-inner-rx) + 1px);
+  height: calc(var(--oc-orbit-inner-ry) + var(--oc-orbit-inner-ry) + 1px);
+}
+
+.oc-orbit__ring--middle {
+  width: calc(var(--oc-orbit-middle-rx) + var(--oc-orbit-middle-rx) + 1px);
+  height: calc(var(--oc-orbit-middle-ry) + var(--oc-orbit-middle-ry) + 1px);
+  border-color: color-mix(in srgb, var(--oc-text-secondary) 16%, var(--oc-border));
+  animation-delay: 80ms;
+}
+
+.oc-orbit__ring--outer {
+  width: calc(var(--oc-orbit-outer-rx) + var(--oc-orbit-outer-rx) + 1px);
+  height: calc(var(--oc-orbit-outer-ry) + var(--oc-orbit-outer-ry) + 1px);
+  border-color: color-mix(in srgb, var(--oc-brand) 13%, var(--oc-border));
+  animation-delay: 160ms;
+}
+
+.oc-orbit__track {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+.oc-orbit__track--inner {
+  --orbit-rx: var(--oc-orbit-inner-rx);
+  --orbit-ry: var(--oc-orbit-inner-ry);
+}
+
+.oc-orbit__track--middle {
+  --orbit-rx: var(--oc-orbit-middle-rx);
+  --orbit-ry: var(--oc-orbit-middle-ry);
+}
+
+.oc-orbit__track--outer {
+  --orbit-rx: var(--oc-orbit-outer-rx);
+  --orbit-ry: var(--oc-orbit-outer-ry);
+}
+
+.oc-orbit__item {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 34px;
+  height: 34px;
+  offset-anchor: 50% 50%;
+  offset-path: ellipse(var(--orbit-rx) var(--orbit-ry) at 50% 50%);
+  offset-distance: var(--orbit-start-distance);
+  offset-rotate: 0deg;
+  animation: oc-orbit-ellipse-spin var(--orbit-duration) linear infinite var(--orbit-offset-delay);
+  will-change: offset-distance;
+}
+
+.oc-orbit__content {
+  display: flex;
+  width: 34px;
+  height: 34px;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  animation: oc-orbit-fade-in 650ms ease-out var(--orbit-fade-delay) both;
+}
+
+.oc-orbit__track--reverse .oc-orbit__item {
+  animation-name: oc-orbit-ellipse-spin-reverse;
+}
+
+.oc-orbit__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+}
+
+.oc-orbit__icon .MuiSvgIcon-root {
+  width: 30px !important;
+  height: 30px !important;
+  color: inherit !important;
+}
+
+.oc-orbit__core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 3;
+  display: grid;
+  width: clamp(64px, 21%, 76px);
+  aspect-ratio: 1;
+  place-items: center;
+  border-radius: 9999px;
+  box-shadow: 0 0 0 10px color-mix(in srgb, var(--oc-brand) 8%, transparent), 0 10px 24px color-mix(in srgb, var(--oc-brand) 18%, transparent);
+  transform: translate(-50%, -50%);
+  animation: oc-orbit-fade-in 700ms ease-out both;
+}
+
+.oc-orbit__core-mark {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes oc-orbit-ellipse-spin {
+  from { offset-distance: 0%; }
+  to { offset-distance: 100%; }
+}
+
+@keyframes oc-orbit-ellipse-spin-reverse {
+  from { offset-distance: 100%; }
+  to { offset-distance: 0%; }
+}
+
+@keyframes oc-orbit-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.oc-orbit:hover .oc-orbit__track,
+.oc-orbit:hover .oc-orbit__content,
+.oc-orbit:hover .oc-orbit__item {
+  animation-play-state: paused;
+}
+
+@media (max-width: 1023px) {
+  .oc-orbit {
+    width: min(100%, 360px);
+    height: clamp(210px, 30vw, 250px);
+  }
+
+  .oc-orbit__item {
+    width: 30px;
+    height: 30px;
+  }
+
+  .oc-orbit__icon .MuiSvgIcon-root {
+    width: 26px !important;
+    height: 26px !important;
+  }
+}
+
+@media (max-width: 639px) {
+  .oc-orbit {
+    width: min(100%, 300px);
+    height: clamp(180px, 52vw, 220px);
+  }
+
+  .oc-orbit__item,
+  .oc-orbit__content {
+    width: 26px;
+    height: 26px;
+  }
+
+  .oc-orbit__icon .MuiSvgIcon-root {
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  .oc-orbit__core {
+    width: 64px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .oc-orbit__track,
+  .oc-orbit__item,
+  .oc-orbit__ring,
+  .oc-orbit__core {
+    animation: none !important;
+  }
+
+  .oc-orbit__item {
+    offset-distance: var(--orbit-start-distance);
+  }
+}
+
+/* Premium solar-system rendering: four circular SVG tracks share the same
+   radii as the CSS circular motion paths used by the actors. */
+.oc-orbit {
+  position: relative;
+  width: min(100%, 360px);
+  height: auto;
+  aspect-ratio: 1;
+  container-type: size;
+  isolation: isolate;
+  contain: layout paint;
+}
+
+.oc-orbit__scene,
+.oc-orbit__actors {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.oc-orbit__scene {
+  z-index: 1;
+  overflow: visible;
+}
+
+.oc-orbit__svg-ring {
+  fill: none;
+  stroke-width: 0.42;
+  stroke-dasharray: 0.85 1.25;
+  stroke-linecap: round;
+}
+
+.oc-orbit__svg-ring--warm {
+  stroke: var(--oc-brand);
+  opacity: 1;
+}
+
+.oc-orbit__svg-ring--neutral {
+  stroke: var(--oc-text-secondary);
+  opacity: 1;
+}
+
+.oc-orbit__comet {
+  overflow: visible;
+}
+
+.oc-orbit__comet-tail {
+  fill: url(#oc-comet-gradient);
+  opacity: 0.52;
+}
+
+.oc-orbit__comet-head {
+  fill: var(--oc-brand);
+  filter: drop-shadow(0 0 1px color-mix(in srgb, var(--oc-brand) 70%, white));
+}
+
+.oc-orbit__actors {
+  z-index: 2;
+  pointer-events: none;
+}
+
+.oc-orbit__item {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: -16px 0 0 -16px;
+  offset-path: none;
+  offset-distance: 0;
+  offset-rotate: 0deg;
+  transform: rotate(var(--orbit-start-angle)) translateX(calc(var(--orbit-radius) * 1cqw));
+  will-change: transform;
+}
+
+.oc-orbit__item {
+  width: 32px;
+  height: 32px;
+  animation: oc-orbit-spin var(--orbit-duration) linear infinite;
+}
+
+.oc-orbit__item--reverse {
+  animation-name: oc-orbit-spin-reverse;
+}
+
+.oc-orbit__content {
+  display: flex;
+  width: 32px;
+  height: 32px;
+  align-items: center;
+  justify-content: center;
+  animation: oc-orbit-fade-in 650ms ease-out var(--orbit-fade-delay) both;
+}
+
+.oc-orbit__icon {
+  width: 28px !important;
+  height: 28px !important;
+  color: inherit !important;
+}
+
+.oc-orbit__core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 3;
+  display: grid;
+  width: clamp(56px, 20%, 72px);
+  aspect-ratio: 1;
+  place-items: center;
+  border-radius: 9999px;
+  box-shadow: 0 0 0 10px color-mix(in srgb, var(--oc-brand) 8%, transparent), 0 10px 24px color-mix(in srgb, var(--oc-brand) 18%, transparent);
+  transform: translate(-50%, -50%);
+  animation: oc-orbit-fade-in 700ms ease-out both;
+}
+
+.oc-orbit__core-mark {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes oc-orbit-spin {
+  from {
+    transform: rotate(var(--orbit-start-angle)) translateX(calc(var(--orbit-radius) * 1cqw));
+  }
+  to {
+    transform: rotate(calc(var(--orbit-start-angle) + 360deg)) translateX(calc(var(--orbit-radius) * 1cqw));
+  }
+}
+
+@keyframes oc-orbit-spin-reverse {
+  from {
+    transform: rotate(var(--orbit-start-angle)) translateX(calc(var(--orbit-radius) * 1cqw));
+  }
+  to {
+    transform: rotate(calc(var(--orbit-start-angle) - 360deg)) translateX(calc(var(--orbit-radius) * 1cqw));
+  }
+}
+
+@keyframes oc-orbit-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.oc-orbit:hover .oc-orbit__item {
+  animation-play-state: paused;
+}
+
+@media (max-width: 1023px) {
+  .oc-orbit {
+    width: min(100%, 340px);
+  }
+
+  .oc-orbit__item,
+  .oc-orbit__content {
+    width: 30px;
+    height: 30px;
+  }
+
+  .oc-orbit__item {
+    margin: -15px 0 0 -15px;
+  }
+
+  .oc-orbit__icon {
+    width: 26px !important;
+    height: 26px !important;
+  }
+}
+
+@media (max-width: 639px) {
+  .oc-orbit {
+    width: min(100%, 280px);
+  }
+
+  .oc-orbit__item,
+  .oc-orbit__content {
+    width: 26px;
+    height: 26px;
+  }
+
+  .oc-orbit__item {
+    margin: -13px 0 0 -13px;
+  }
+
+  .oc-orbit__icon {
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  .oc-orbit__core {
+    width: 60px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .oc-orbit__item,
+  .oc-orbit__core {
+    animation: none !important;
+  }
+}
+
+@media (min-width: 640px) {
+  .oc-page-content {
+    padding-inline: var(--oc-space-4);
+  }
+}
+
+@media (min-width: 1024px) {
+  .oc-page-content {
+    padding-inline: 20px;
+  }
+}
+
+/* Shared surface reset for the client UI: use spacing and separators first,
+   not a stack of independent, colorful cards. */
+.app-shell main .bg-white.border {
+  border-color: #e5e5e5;
+  box-shadow: none;
+}
+
+.app-shell main .rounded-2xl {
+  border-radius: 12px;
+}
+
+.app-shell main .rounded-xl {
+  border-radius: 9px;
+}
+
+.app-shell main .shadow-xs,
+.app-shell main .shadow-sm,
+.app-shell main .shadow-md,
+.app-shell main .shadow-lg,
+.app-shell main .shadow-xl {
+  box-shadow: none;
+}
+
+/* ------------------------------------------------------------------
+   Status badges
+------------------------------------------------------------------- */
+.badge-running {
+  background-color: #eff6ff;
+  color: #2563eb;
+  border: 1px solid #bfdbfe;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.badge-kids {
+  background-color: #dcfce7;
+  color: #16a34a;
+  border: 1px solid #86efac;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.12);
+}
+
+.badge-teen {
+  background-color: #dbeafe;
+  color: #2563eb;
+  border: 1px solid #93c5fd;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.12);
+}
+
+.badge-adult {
+  background-color: #fee2e2;
+  color: #dc2626;
+  border: 1px solid #fca5a5;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.12);
+}
+
+.badge-all {
+  background-color: #f1f5f9;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.12);
+}
+
+.badge-standalone {
+  background-color: #f1f5f9;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ------------------------------------------------------------------
+   Pulse animation for live indicators
+------------------------------------------------------------------- */
+@keyframes pulseGreen {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+}
+
+.pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #16a34a;
+  display: inline-block;
+  animation: pulseGreen 2s infinite ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Entrance animations
+   (the components already use animate-in / fade-in / slide-* / zoom-*
+   class names, which had no styles before)
+------------------------------------------------------------------- */
+@keyframes fc-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fc-slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.99);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fc-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fc-slide-in-left {
+  from {
+    opacity: 0.6;
+    transform: translateX(-16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fc-zoom-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-in {
+  animation-duration: 0.2s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-fill-mode: both;
+}
+
+.fade-in {
+  animation-name: fc-fade-in;
+}
+
+.slide-in-from-top-2 {
+  animation-name: fc-slide-down;
+}
+
+.slide-in-from-bottom-2 {
+  animation-name: fc-slide-up;
+}
+
+.slide-in-from-left {
+  animation-name: fc-slide-in-left;
+}
+
+/* Keep last so a combined `fade-in zoom-in-95` resolves to the zoom */
+.zoom-in-95 {
+  animation-name: fc-zoom-in;
+}
+
+.name-reveal {
+  animation: fc-fade-in 0.25s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Scoped elevation for the non-protected Library screens. */
+.oc-library-surface {
+  box-shadow: var(--oc-elevation-1);
+  transition: box-shadow 180ms ease, transform 180ms ease;
+}
+
+.oc-library-surface:hover {
+  box-shadow: var(--oc-elevation-2);
+}
